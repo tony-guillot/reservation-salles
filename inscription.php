@@ -18,12 +18,13 @@ require 'class/bdd.php';
 require 'class/form.php';
 
 
-
 if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login'])&& !empty($_POST['password '])){
+    
+    
     
     $login = $_POST['login'];
     $password = $_POST['password'];
-
+    
 
     // $db = new Bdd('reservationsalles');
     
@@ -37,17 +38,10 @@ if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login'])&& !empty
 
     $inscription->userRegister($login, $password);
 
-    
 
     
     
 }
-
-
-
-
-
-
 
 
 

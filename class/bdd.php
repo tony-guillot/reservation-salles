@@ -44,14 +44,10 @@ class Bdd{
 
         $password = password_hash($password, PASSWORD_BCRYPT);
         
-        $insert = $this->getPDO()->prepare('INSERT INTO utilisateurs(login,password)VALUES(:login, :password)');
+        $insert = $this->getPDO()->prepare('INSERT INTO utilisateurs (login,password)VALUES(:login, :password)');
         $insert->bindValue(':login', $login);
         $insert->bindValue(':password', $password);
         $insert->execut();
-        
-        
-        
-        
         
         return  $insert;
 

@@ -38,14 +38,14 @@ class Form{
     // }
 
     public function input($name){
-
-        return $this->surround('<label>Nom d\'utilisateur</label></br><input type="text" name="'.$name.'" >');
-
+    
+    return $this->surround('<label>Nom d\'utilisateur</label></br><input type="text" name="'.$name.'" >');
+    
     }
-
-
+    
+    
     public function password($name){
-
+        
         return  $this->surround(
             
             '<label class="label">Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto">');
