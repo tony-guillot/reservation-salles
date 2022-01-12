@@ -8,38 +8,85 @@
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body>  
 
-<h1>Connexion</h1>
+    <?php
+    include 'include/header.php';
+    ?>
+
+        <h1>Connexion</h1>
+
+
 <?php
-    
+
     require 'class/form.php';
+    require 'class/Login.php';
+    require 'class/register.php';
     
+    if(isset($_POST['envoyer'])){
+
+
+        $log = $_POST['login'];
+        $password = $_POST['password'];
+        
+        
+        $login = new Login($log, $password);
+        $connect = new Register($log, $password);
+        
+        $password_verify = $login->Login($login, $password);
+        var_dump($password_verify);
+
+        if($connect->checkUser($log, $password)){
+
+            $msg = 'Utilisateur introuvable';
+            
+        }if($login->PasswordVerify($password, $password_verify )){
+
+           
+
+        }
+        
+        
+        
+        
+    
+        
+        // else($login->Login($log, $password)){
+
+        //     $msg = 'connexion reussie';
+        // }
+        
+    
+    
+    }
+    
+
     
     $form = new Form($_POST);
+
+
     
     ?>
-    
-    
-    
-    
+     
     <form action="#" method="post">
-        
-        
-        
-
-    
-
-    
  
      <?php
  
      echo $form->input('login');
      echo $form->password('password');
      echo $form->submit();
- 
+     
      ?>
 
     </form>
+    <?php 
+    if(isset($_SESSION['id'])){ 
+   
+        ?>
+         <h1> Bienvenue <br/> <?php echo  $res['login'] ?> </h1>
+
+    <?php } ?>
+
+
 </body>
 </html>

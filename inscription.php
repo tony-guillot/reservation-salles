@@ -14,45 +14,55 @@
 <h1>Inscription</h1>
 
 <?php 
-require 'class/bdd.php';
-require 'class/form.php';
 
+    require 'class/Form.php';
 
-if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login'])&& !empty($_POST['password '])){
+    if(isset($_POST['envoyer'])){
+
+        // if(!isset($_POST['login'],$_POST['password']) && !empty($_POST['login'])&& !empty($_POST['password '])){
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+        
+        require 'class/Bdd.php';
+        require 'class/Register.php';
+        
+        
+        $singup = new Register($login, $password);
+        
+        if($singup->checkUser($login,$password)){
+            
+            $msg = 'Nom d\'utilisateur déjà pris' ;
+            
+                }if($singup->emptyInput($msg)){
+
+                    $msg = 'Veuillez remplir tous les champs';
+
+                }else{
+                
+                    $singup->signupUser();
+                }
     
-    
-    
-    $login = $_POST['login'];
-    $password = $_POST['password'];
-    
+          }
 
-    // $db = new Bdd('reservationsalles');
+         
+       
     
+          
+             
+        // }
+        
     
-    // $insert = $db->insert('INSERT INTO utilisateurs(login,password)VALUES(:login, :password)');
-    
-    // $insert->bindValue(':login',$login);
-    // $insert->bindValue(':password',$password);
-
-    $inscription = new Bdd('reservationsalles');
-
-    $inscription->userRegister($login, $password);
-
-
-    
-    
-}
-
-
-
-$form = new Form($_POST);
- 
-?>
+        $form = new Form($_POST);
+        
+        ?>
 
     <form action="#" method="post">
 
     <?php
+    if(isset($msg)){
 
+        echo $msg;
+    }
     echo $form->input('login');
     echo $form->password('password');
     echo $form->submit();
