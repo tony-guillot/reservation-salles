@@ -20,57 +20,46 @@
 <?php
 
     require 'class/form.php';
-    require 'class/Login.php';
-    require 'class/register.php';
+    require 'class/User.php';
+    
+
+    $form = new Form($_POST);
     
     if(isset($_POST['envoyer'])){
 
 
-        $log = $_POST['login'];
-        $password = $_POST['password'];
-        
-        
-        $login = new Login($log, $password);
-        $connect = new Register($log, $password);
-        
-        $password_verify = $login->Login($login, $password);
-        var_dump($password_verify);
-
-        if($connect->checkUser($log, $password)){
-
-            $msg = 'Utilisateur introuvable';
+        if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login']) && !empty($_POST['password'])){
+            $_POST['login'] = $login;
+            $_POST['password'] = $password;
             
-        }if($login->PasswordVerify($password, $password_verify )){
+            $login = new User($login, $password);
+            
+            if($login->checkUser()){
 
-           
+                if($login->login($password)){
+
+                    $msg = 'vous êtes connecté';
+
+                }
+
+            }else{
+
+                $msg = 'utilisateur introuvable';
+            }
 
         }
-        
-        
-        
-        
-    
-        
-        // else($login->Login($log, $password)){
-
-        //     $msg = 'connexion reussie';
-        // }
-        
-    
-    
-    }
-    
-
-    
-    $form = new Form($_POST);
-
-
-    
+}
     ?>
      
     <form action="#" method="post">
- 
+    
      <?php
+
+    if(isset($msg)){
+
+    echo $msg;
+
+    }
  
      echo $form->input('login');
      echo $form->password('password');
@@ -80,10 +69,11 @@
 
     </form>
     <?php 
-    if(isset($_SESSION['id'])){ 
+    if(isset($_SESSION['login'])){ 
    
+        var_dump($_SESSION);
         ?>
-         <h1> Bienvenue <br/> <?php echo  $res['login'] ?> </h1>
+         <h1> Bienvenue <br/> <?php echo  $_SESSION['login']  ?> </h1>
 
     <?php } ?>
 

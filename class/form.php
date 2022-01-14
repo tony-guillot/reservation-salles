@@ -51,6 +51,16 @@ class Form{
             '<label class="label">Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto">');
 
     }
+
+    public function ConfirmPassword($name){
+        
+        return  $this->surround(
+            
+            '<label class="label">Confirmer le Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto">');
+
+    }
+
+
     public function submit(){
 
         return  $this->surround('<button type="submit" class="btn btn-primary" name="envoyer">Envoyer</button>');

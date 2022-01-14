@@ -16,44 +16,51 @@
 <?php 
 
     require 'class/Form.php';
+    
+    require 'class/User.php';
+
+    $form = new Form($_POST);
+    
+
 
     if(isset($_POST['envoyer'])){
 
-        // if(!isset($_POST['login'],$_POST['password']) && !empty($_POST['login'])&& !empty($_POST['password '])){
-        $login = $_POST['login'];
-        $password = $_POST['password'];
+    
         
-        require 'class/Bdd.php';
-        require 'class/Register.php';
-        
-        
-        $singup = new Register($login, $password);
-        
-        if($singup->checkUser($login,$password)){
-            
-            $msg = 'Nom d\'utilisateur déjà pris' ;
-            
-                }if($singup->emptyInput($msg)){
+        if(isset($_POST['login'],$_POST['password'], $_POST['ConfirmPassword']) && !empty($_POST['login']) && !empty($_POST['password'])  && !empty($_POST['ConfirmPassword'])){
 
-                    $msg = 'Veuillez remplir tous les champs';
 
+            
+
+            $login = $_POST['login'];
+            $password = $_POST['password'];
+
+            $user = new User($login, $password);
+
+
+            if($user->checkUser($login)){
+
+
+                if($password == $_POST['ConfirmPassword']){
+
+                    $user->signup($password);
+                    $msg = 'inscription validée';
+                    
                 }else{
-                
-                    $singup->signupUser();
+                    $msg = 'les mot de passes ne sont pas identique';
                 }
-    
-          }
 
-         
-       
-    
-          
-             
-        // }
-        
-    
-        $form = new Form($_POST);
-        
+            }else{
+
+                $msg = 'utilisateur déjà pris';
+            }
+                
+        }else{  
+            
+            $msg = 'veuillez remplir tout les champs';
+        }
+
+}
         ?>
 
     <form action="#" method="post">
@@ -65,6 +72,8 @@
     }
     echo $form->input('login');
     echo $form->password('password');
+    echo $form->ConfirmPassword('ConfirmPassword');
+
     echo $form->submit();
 
     ?>
