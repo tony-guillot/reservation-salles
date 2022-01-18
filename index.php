@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,41 +14,42 @@
 <body>
     
     <?php 
-    require 'include/header.html';
-    require 'class/bdd.php';
+    require 'include/header.php';
+
+
+    require 'class/Db_connect.php';
     require 'class/form.php';
     ?>
 
 
 <h1>Reservation salles</h1>
 
-    
     <?php
+     
+     if(isset($_SESSION['id'])){
+
+        ?> <h3>Bienvenue <?= $_SESSION['login'];?></h3>
+     <?php }
+
+        if(!isset($_SESSION['id'])){
+
+        ?> <h5>veuillez vous connecter pour reserver un crénaux </h3>
+        <?php
+         }else{
+
+        ?> <p>Cliquez <a href="reservation.php">ici</a> pour reserver une salle </p>
+
+       <?php }  ?>         
+        
     
-     $form = new Form($_POST);
-
-    // $db = new Bdd('reservationsalles');
-
-    // $datas = $db->query('SELECT * FROM utilisateurs');
-    
-    // var_dump($datas);
-    ?>
-
-    <form action="#" method="post">
-
-    <?php
-
-    echo $form->input('login');
-    echo $form->password('password');
-    echo $form->submit();
-
 
 
 
     
-    ?>
+    
 
-    </form>
+    
+  
 
     
     <?php

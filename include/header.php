@@ -1,6 +1,4 @@
-<?php
-session_start()
-?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,16 +7,38 @@ session_start()
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Accueil<span class="sr-only"></span></a>
+          <a class="nav-link" href="index.php">Accueil<span class="sr-only"></span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
+
+          <?php if(!isset($_SESSION['id'])){?>
+
+            <a class="nav-link" href="connexion.php">Connexion</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="inscription.php">Inscription</a>
+            </li>
+         <?php } 
+
+          
+
+
+            ?>
+            
+         <?php if(isset($_SESSION['id'])){ ?>
+
+          <li class="nav-item">
+          <a  class="nav-link" href="reservation.php">Reservation</a>
+          </li>
+      
+    
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+        <a  class="nav-link" href="disconnect.php">Déconnexion</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+        <?php } ?>
+
+       
+       
         </li>
       </ul>
     </div>

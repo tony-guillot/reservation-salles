@@ -45,19 +45,24 @@ class User{
         $stmt = $this->db->prepare('SELECT * FROM utilisateurs WHERE login = ?');
         $stmt->execute(array( $this->login));
         $row_count = $stmt->rowCount();
-        $userinfo = $stmt->fetch();
+        
 
             if($row_count == 1){
 
-               $_SESSION['login'] = $userinfo['login'];
-               
-               password_verify($password, $userinfo['password']);
+                $userinfo = $stmt->fetch();
+                $_SESSION['login'] = $userinfo['login'];
+
+                $_SESSION['id'] = true;
+                password_verify($password, $userinfo['password']);
                 return true;
+            }else{
+
+                return false;
             }
         
       }
             
-    public function checkUser(){
+    public function checkUserSignup(){
 
         $stmt = $this->db->prepare('SELECT * FROM utilisateurs WHERE login = ?');
         $stmt->execute(array( $this->login));
@@ -66,6 +71,25 @@ class User{
           $row_count = $stmt->rowCount();
 
         if($row_count == 0 ){
+
+            return True;
+
+    }else{
+
+        return false;
+    }
+    
+    }
+
+    public function checkUserLogin(){
+
+        $stmt = $this->db->prepare('SELECT * FROM utilisateurs WHERE login = ?');
+        $stmt->execute(array( $this->login));
+
+
+          $row_count = $stmt->rowCount();
+
+        if($row_count == 1){
 
             return True;
 
@@ -87,5 +111,6 @@ class User{
         return false;
     }
 }
+
 
 }

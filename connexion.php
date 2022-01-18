@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,24 +32,28 @@
 
 
         if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login']) && !empty($_POST['password'])){
-            $_POST['login'] = $login;
-            $_POST['password'] = $password;
+            $login = $_POST['login'];
+            $password = $_POST['password']; 
             
             $login = new User($login, $password);
             
-            if($login->checkUser()){
+            if($login->checkUserLogin()){
 
                 if($login->login($password)){
 
                     $msg = 'vous êtes connecté';
-
+                    header( "refresh:2;url=index.php" );
+                
                 }
 
             }else{
 
-                $msg = 'utilisateur introuvable';
+                $msg = 'mauvais nom d\utilisateur ou mot de passe';
             }
 
+        }else{
+
+            $msg = 'veuillez remplir tout les champs';
         }
 }
     ?>

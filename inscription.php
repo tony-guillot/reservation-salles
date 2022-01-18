@@ -10,6 +10,8 @@
     <title>Document</title>
 </head>
 <body>
+    <?php require 'include/header.php';?>
+
 
 <h1>Inscription</h1>
 
@@ -38,7 +40,7 @@
             $user = new User($login, $password);
 
 
-            if($user->checkUser($login)){
+            if($user->checkUserSignup($login)){
 
 
                 if($password == $_POST['ConfirmPassword']){
