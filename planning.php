@@ -22,17 +22,18 @@ session_start();
 
     require 'include/header.php';
     
-    require 'class/Month.php';
+    require 'class/calendar_class/Month.php';
+    require 'class/calendar_class/Events.php';
     
-    try{
-        
-        $month = new Month($_GET['month'] ?? null, $_GET['years '] ?? null);
+        $events = new Events;
+        $month = new Month($_GET['month'] ?? null, $_GET['year'] ?? null); // si GET['month'] ou GET['years'] n'est pas défini, il prend la valeur null
         $start = $month->getFirstDay()->modify('last monday');
-    
-    }catch(\Exception $e){
+        $weeks = $month->getWeeks();
+        $end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)). 'days');
+        
+        $events = $events->getEventsBetweenByDay($start, $end);
 
-        $month  = new Month();
-    }
+ 
     
     ?>  
         
@@ -40,9 +41,9 @@ session_start();
         <p id="calendar_p">Planning des reservations des salles</p>
         <h1 ><?= $month->toString()?></h1>
             <div>
-                <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&years=<?= $month->previousMonth()->years; ?>" class="btn btn-primary">&lt;</a>
+                <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->years; ?>" class="btn btn-primary">&lt;</a>
 
-                <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&years=<?= $month->nextMonth()->years;?>" class="btn btn-primary">&gt;</a>
+                <a href="planning.php?month=<?= $month->nextMonth()->month; ?>&year=<?= $month->nextMonth()->years;?>" class="btn btn-primary">&gt;</a>
 
             </div>
         </div>
@@ -50,34 +51,43 @@ session_start();
         
    
 
+
     
 
-  
-    
+    <table class="calendar_table calendar_table--<?=$weeks;?>weeks">
 
-    <table class="calendar_table calendar_table--<?=$month->getWeeks();?>weeks">
-
-     <?php  for($i=0; $i < $month->getWeeks(); $i++):?> 
+     <?php  for($i=0; $i < $weeks; $i++):?> 
         <!-- boucle les jour de la semaine selon le nombres de semaines dans le mois  -->
      <tr>
-         <?php  foreach ($month->days as $k => $day): 
-            
-           $date = (clone $start)->modify("+". ($k + $i *7). "days")  ;?>  
-            
+         <?php  foreach ($month->days as $k => $day):  // $k recupère la valeur des jour en int 
+
+
+        
+        $date = (clone $start)->modify("+". ($k + $i *7). "days");
+        $eventsForDay = $events[$date->format('Y-m-d')] ?? []; // si ce n'est pas defini prend un tableau vide comme valeur
+        ?>  
+
             <!-- $k stock la valeur du jour -->
-         <td class ="<?= $month->WithinMonth($date) ? ' ' : 'calendar_othermonth' ?>">  <!-- si c'est vrais on met rien sinon la class calendar_othermonth -->
+         <td class ="<?= $month->WithinMonth($date) ? '' : 'calendar_othermonth'; ?>">  <!-- si c'est vrais on met rien sinon la class calendar_othermonth -->
 
            <?php if($i === 0): ?>
             <div class="calendar_weekday"> <?= $day ;?></div>
             <?php endif; ?>
-           <div class="calendar_day"><?= $date->format('d');?> </div>
+           <div class="calendar_day"><?= $date->format('d');?></div>
+           <?php  foreach($eventsForDay  as $event): ?>
+            
+            <div class="calendar_events">
+
+            <?= $event['login']?> - <?=(new Datetime($event['debut']))->format('H:i')?> -<?=(new Datetime($event['fin']))->format('H:i');var_dump($event['id']) ?> -<a href="event.php?id=<?=$event['id'];?>"> <?= $event['titre'];?> 
+            </div></a>
+            <?php endforeach; ?>    
          </td>
          <?php endforeach; ?>
      </tr>
         <?php endfor; ?> <!-- endfor remplace les accolade php  -->
     </table>
     
-
+    
     
 </body>
 </html>

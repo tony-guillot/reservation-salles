@@ -70,7 +70,7 @@ session_start();
  
      echo $form->input('login');
      echo $form->password('password');
-     echo $form->submit();
+     echo $form->submit('envoyer');
      
      ?>
 
@@ -78,7 +78,6 @@ session_start();
     <?php 
     if(isset($_SESSION['login'])){ 
    
-        var_dump($_SESSION);
         ?>
          <h1> Bienvenue <br/> <?php echo  $_SESSION['login']  ?> </h1>
 

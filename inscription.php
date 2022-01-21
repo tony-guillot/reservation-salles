@@ -75,8 +75,8 @@
     echo $form->input('login');
     echo $form->password('password');
     echo $form->ConfirmPassword('ConfirmPassword');
+    echo $form->submit('envoyer');
 
-    echo $form->submit();
 
     ?>
     </form>

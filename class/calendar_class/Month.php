@@ -3,6 +3,7 @@
 class Month{
     
     private $months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout','Septembre','Octobre', 'Novembre', 'Decembre'];
+
     public $days = ['Lundi', 'Mardi', 'Mercredi','Jeudi','Vendredi','Samedi', 'Dimanche'];
     public  $month;
     public  $years;
@@ -40,7 +41,7 @@ class Month{
 
         return new \Datetime("{$this->years}-{$this->month}-01"); 
 
-
+ 
     }
  
 
@@ -100,7 +101,7 @@ class Month{
         if($month > 12){
 
             $month = 1;
-            $years = $years++;
+            $years = $years + 1;   //  si le mois est supérieur a 12  le mois reviens au 1er (janvier) et ajoute 1 a l'année
             
 
         } 
@@ -120,7 +121,7 @@ class Month{
         if($month < 1){
 
             $month = 12;
-            $years -= 1;
+            $years = $years - 1;
         }
         return new Month($month,$years);
     }

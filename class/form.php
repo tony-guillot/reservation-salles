@@ -61,8 +61,41 @@ class Form{
     }
 
 
-    public function submit(){
+    public function submit($name){
 
-        return  $this->surround('<button type="submit" class="btn btn-primary" name="envoyer">Envoyer</button>');
+        return  $this->surround('<button type="submit" class="btn btn-primary" name="'.$name.'">Envoyer</button>');
+    }
+
+    public function input_titre($name){
+
+        return $this->surround(
+
+            '<label class="label">Titre de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto">'
+        );
+    }
+    
+
+    public function input_description($name){
+
+        return $this->surround(
+
+            '<label class="label">Description de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto">'
+        );
+    }
+
+    public function input_date_debut($name){
+
+        return $this->surround(
+
+            '<label class="label">Date de début</label></br><input type="datetime-local" name="'.$name.'" class="col-auto">'
+        );
+    }
+
+    public function input_date_fin($name){
+
+        return $this->surround(
+
+            '<label class="label">Date de fin</label></br><input type="datetime-local" name="'.$name.'" class="col-auto">'
+        );
     }
 }

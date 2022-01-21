@@ -18,17 +18,16 @@
             <li class="nav-item">
             <a class="nav-link" href="inscription.php">Inscription</a>
             </li>
-         <?php } 
+         <?php } ?>
 
-          
-
-
-            ?>
+         <li class="nav-item">
+          <a  class="nav-link" href="planning.php">Planning</a>
+          </li>
             
          <?php if(isset($_SESSION['id'])){ ?>
 
           <li class="nav-item">
-          <a  class="nav-link" href="reservation.php">Reservation</a>
+          <a  class="nav-link" href="reservation-form.php">Reservation</a>
           </li>
       
     
