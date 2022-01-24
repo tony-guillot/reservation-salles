@@ -23,7 +23,7 @@ session_start();
 
 
 
-    <h1> Reserver un crénaux</h1>
+    <h1> Reserver un crénau</h1>
 
     <?php $form = new Form();
 
@@ -42,12 +42,21 @@ session_start();
             $fin = $_POST['fin'];
             $id_utilisateur = $_SESSION['id'];
 
+            var_dump($_SESSION['id']);
 
             $insert = new Calendar_form();
-            $insert->calendarInsert($titre,$description,$debut,$fin,$id_utilisateur);
+            
+            if($insert->calendarInsert($titre,$description,$debut,$fin,$id_utilisateur)){
+
+                $msg = "Reservation validée";
+            }
+            
 
            
 
+        }else{
+
+            $msg = "veuillez remplir tout les champs";
         }   
     }
     ?>
@@ -59,8 +68,8 @@ session_start();
         echo $msg;
     }
     
-    echo $form->input_titre('titre');
-    echo $form->input_description('description');
+    echo $form->input_titre('titre','titre de la reservation');
+    echo $form->input_description('description', 'description de reservation');
     echo $form->input_date_debut('debut');
     echo $form->input_date_fin('fin');
     echo $form->submit('envoyer');

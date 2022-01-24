@@ -21,10 +21,12 @@ class Events{
      */
     public function getEventsBetween(DateTime $start, DateTime $end): array{
 
-        $req = $this->db->prepare("SELECT * from reservation INNER JOIN utilisateurs ON reservation.id_utilisateur = utilisateurs.id WHERE debut BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:59')}'");
+        $req = $this->db->prepare("SELECT * from reservation  WHERE debut BETWEEN '{$start->format('Y-m-d 08:00:00')}' AND '{$end->format('Y-m-d 19:00:00')}'");
         $req->execute();
 
         $results = $req->fetchall();
+
+        
 
       
       
@@ -76,7 +78,10 @@ class Events{
 
     }
 
-    public function getUserResa(){
+    /**
+     * @return string permet de récuperer le login des personnes qui ont reserver
+     */
+    public function getUserRes(){
 
         return  $this->db->query("SELECT * FROM reservation as r INNER JOIN utilisateurs on r.id_utilisateur = utilisateurs.id")->fetch();
     }

@@ -37,26 +37,26 @@ class Form{
     //     return $this->data[$index];
     // }
 
-    public function input($name){
+    public function input($name,$placeholder){
     
-    return $this->surround('<label>Nom d\'utilisateur</label></br><input type="text" name="'.$name.'" >');
+    return $this->surround('<label>Nom d\'utilisateur</label></br><input type="text" required name="'.$name.'" placeholder="'.$placeholder.'">');
     
     }
     
     
-    public function password($name){
+    public function password($name,$placeholder){
         
         return  $this->surround(
             
-            '<label class="label">Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto">');
+            '<label class="label">Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto" required placeholder="'.$placeholder.'"');
 
     }
 
-    public function ConfirmPassword($name){
+    public function ConfirmPassword($name,$placeholder){
         
         return  $this->surround(
             
-            '<label class="label">Confirmer le Mot de passe</label></br><input type="password" name="'.$name.'" class="col-auto">');
+            '<label class="label">Confirmer le Mot de passe</label></br><input type="password" required name="'.$name.'" class="col-auto"placeholder="'.$placeholder.'"');
 
     }
 
@@ -66,20 +66,20 @@ class Form{
         return  $this->surround('<button type="submit" class="btn btn-primary" name="'.$name.'">Envoyer</button>');
     }
 
-    public function input_titre($name){
+    public function input_titre($name,$placeholder){
 
         return $this->surround(
 
-            '<label class="label">Titre de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto">'
+            '<label class="label">Titre de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto" required  placeholder="'.$placeholder.'">'
         );
     }
     
 
-    public function input_description($name){
+    public function input_description($name, $placeholder){
 
         return $this->surround(
 
-            '<label class="label">Description de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto">'
+            '<label class="label">Description de la reservation</label></br><input type="text" name="'.$name.'" class="col-auto" required placeholder="'.$placeholder.'">'
         );
     }
 
@@ -87,7 +87,7 @@ class Form{
 
         return $this->surround(
 
-            '<label class="label">Date de début</label></br><input type="datetime-local" name="'.$name.'" class="col-auto">'
+            '<label class="label">Date de début</label></br><input type="datetime-local" required name="'.$name.'" class="col-auto" >'
         );
     }
 
@@ -95,7 +95,7 @@ class Form{
 
         return $this->surround(
 
-            '<label class="label">Date de fin</label></br><input type="datetime-local" name="'.$name.'" class="col-auto">'
+            '<label class="label">Date de fin</label></br><input type="datetime-local" required name="'.$name.'" class="col-auto">'
         );
     }
 }

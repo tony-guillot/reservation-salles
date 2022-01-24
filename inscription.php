@@ -72,9 +72,9 @@
 
         echo $msg;
     }
-    echo $form->input('login');
-    echo $form->password('password');
-    echo $form->ConfirmPassword('ConfirmPassword');
+    echo $form->input('login','Entrez un nom d\'utilisateur');
+    echo $form->password('password','Entrez un mot de passe');
+    echo $form->ConfirmPassword('ConfirmPassword','Confirmez le mot de passe');
     echo $form->submit('envoyer');
 
 

@@ -15,13 +15,15 @@ class Calendar_form{
         public function  calendarInsert($titre,$description,$debut,$fin,$id_utilisateur){
 
 
-            $sql = $this->db->prepare('INSERT INTO reservation (titre,description,debut,fin,id_utilisateur)VALUES(?,?,?,?,?)');
+            $sql = $this->db->prepare('INSERT INTO reservation (titre,description,debut,fin,id_utilisateur)VALUES(?,?,?,?,?)' );
             
             
             if($sql->execute(array($titre,$description,$debut,$fin,$id_utilisateur))){
 
                 return $sql;
             }
+
+            
 
         }       
 }

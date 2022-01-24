@@ -68,8 +68,8 @@ session_start();
 
     }
  
-     echo $form->input('login');
-     echo $form->password('password');
+     echo $form->input('login','Entrez votre nom d\'utilisateur');
+     echo $form->password('password','Entrez votre mot de passe');
      echo $form->submit('envoyer');
      
      ?>

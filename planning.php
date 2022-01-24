@@ -32,6 +32,8 @@ session_start();
         $end = (clone $start)->modify('+' . (6 + 7 * ($weeks -1)). 'days');
         
         $events = $events->getEventsBetweenByDay($start, $end);
+        $user_res = new Events;
+        $user_result = $user_res->getUserRes();
 
  
     
@@ -78,7 +80,7 @@ session_start();
             
             <div class="calendar_events">
 
-            <?= $event['login']?> - <?=(new Datetime($event['debut']))->format('H:i')?> -<?=(new Datetime($event['fin']))->format('H:i');var_dump($event['id']) ?> -<a href="event.php?id=<?=$event['id'];?>"> <?= $event['titre'];?> 
+            <?= $user_result['login']?> - <?=(new Datetime($event['debut']))->format('H:i')?> -<?=(new Datetime($event['fin']))->format('H:i'); ?> -<a href="event.php?id=<?=$event['id'];?>"> <?= $event['titre'];?> 
             </div></a>
             <?php endforeach; ?>    
          </td>
@@ -86,6 +88,8 @@ session_start();
      </tr>
         <?php endfor; ?> <!-- endfor remplace les accolade php  -->
     </table>
+
+    <a href="reservation-form.php" class="calendar_button">+</a>
     
     
     

@@ -51,8 +51,8 @@ class User{
 
                 $userinfo = $stmt->fetch();
                 $_SESSION['login'] = $userinfo['login'];
+                $_SESSION['id'] = $userinfo['id'];
 
-                $_SESSION['id'] = true;
                 password_verify($password, $userinfo['password']);
                 return true;
             }else{
