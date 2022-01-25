@@ -125,4 +125,9 @@ class Month{
         }
         return new Month($month,$years);
     }
+
+    public function weekEnd(){
+
+        
+    }
 }

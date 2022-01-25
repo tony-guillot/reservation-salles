@@ -21,7 +21,7 @@ session_start();
     require 'class/Db_connect.php';
     require 'class/form.php';
 
-    var_dump($_SESSION['id']);
+    
 
 
     ?>
@@ -47,7 +47,6 @@ session_start();
        <?php }  ?>         
         
     
-
 
 
     

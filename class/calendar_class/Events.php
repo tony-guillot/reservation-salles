@@ -21,11 +21,12 @@ class Events{
      */
     public function getEventsBetween(DateTime $start, DateTime $end): array{
 
-        $req = $this->db->prepare("SELECT * from reservation  WHERE debut BETWEEN '{$start->format('Y-m-d 08:00:00')}' AND '{$end->format('Y-m-d 19:00:00')}'");
+        $req = $this->db->prepare("SELECT * from reservation  WHERE debut BETWEEN '{$start->format('Y-m-d 00:00:00')}' AND '{$end->format('Y-m-d 23:59:00')}'");
         $req->execute();
 
         $results = $req->fetchall();
-
+        
+        var_dump($start);  
         
 
       
@@ -85,5 +86,19 @@ class Events{
 
         return  $this->db->query("SELECT * FROM reservation as r INNER JOIN utilisateurs on r.id_utilisateur = utilisateurs.id")->fetch();
     }
-}   
 
+    public function timeInterval($start, $end){
+
+        if($start < '8' ){
+
+
+            return true;
+        }else{
+
+            return false;
+        }
+
+        
+        
+    }   
+}
