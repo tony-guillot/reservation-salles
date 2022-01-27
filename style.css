@@ -1,11 +1,13 @@
 *{
 
     list-style: none;
+    text-decoration: none;
 }
 form{
 
-    display: flex;
-    flex-direction: row;
+    text-align: center;
+    margin-top: 5%;
+
 
 }
 
@@ -21,4 +23,55 @@ h1{
     margin-top: 4%;
 }
 
-.form_resa
+.message{
+
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+form input .form_profil {
+
+    font-size: 25px;
+    display: flex;
+    justify-content: right;
+    text-align: center;
+}
+
+.label{
+
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    margin-top: 2%;
+    
+}
+
+form .submit{
+
+    display: flex;
+    margin-top: 2%;
+    margin-left: 47%;
+    
+
+}
+
+.index{
+
+    text-align: center;
+    margin-top: 2%;
+}
+
+footer{
+
+    
+    text-decoration: none;
+    list-style: none;
+   
+    
+}
+
+.h1_index{
+
+    margin-top: 6%;
+}

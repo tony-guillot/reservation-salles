@@ -1,9 +1,15 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['id'])){
+
+    header('location: index.php');
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,102 +18,117 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="calendar.css">
 
-    
 
-    <title>Document</title>
+
+    <title>Reservation</title>
 </head>
+
 <body>
-    <?php require 'include/header.php';
+
+    <?php
+    require 'include/header.php';
     require 'class/form.php';
     require 'class/calendar_class/Calendar_form.php';
-    
-
     ?>
 
     <h1> Reserver un crénau</h1>
 
     <?php $form = new Form();
-    
-    if(isset($_POST['envoyer'])){
 
 
-        if(isset($_POST['titre'],$_POST['description'],$_POST['debut'],$_POST['fin']) && !empty($_POST['titre']) && !empty($_POST['description']) && !empty($_POST['debut']) && !empty($_POST['fin'])){
+    if (isset($_POST['debut'], $_POST['fin'],$_POST['titre'],$_POST['description'])) {
 
-            $titre = $_POST['titre'];
-            $description = $_POST['description'];
-            $debut = $_POST['debut'];
-            $fin = $_POST['fin'];
-            $heure_debut = $_POST['heure_debut'];
-            $heure_fin = $_POST['heure_fin'];
+        $now = new DateTime();
+        $result_now = $now->format('Y-m-d H:i:s');
+        $debut_int = intval((new DateTime(($_POST['debut'])))->format('H'));
+        $fin_int = intval((new DateTime(($_POST['fin'])))->format('H'));
 
 
-            $id_utilisateur = $_SESSION['id'];
+        $debut = (new DateTime($_POST['debut']))->format('Y-m-d H:i:s');
+        $fin = (new DateTime(($_POST['fin'])))->format('Y-m-d H:i:s');
+
+        $day = intval((new DateTime(($_POST['debut'])))->format('w'));
+        
+        $interval =   $fin_int - $debut_int;
+        
             
-            $heure_debut = intval((new DateTime($heure_debut))->format('H'));
-            $heure_fin = intval((new DateTime($heure_fin))->format('H'));
-            
-
+        if($debut >= $result_now){
 
             
-            var_dump($heure_debut);
-            var_dump($heure_fin);
-
-            var_dump($_POST['debut']);
-
+            if($debut_int >= 8 && $fin_int <= 19){
+                
+                if($interval == 1){
                     
-
-            $insert = new Calendar_form();
-
-            
-            
-           
-            
-            
-            if($heure_debut < 8 && $heure_fin > 19){
-
-             echo 'erreur horraire';
-           
-            }else{
-
-                $insert->calendarInsert($titre,$description,$debut,$fin,$id_utilisateur);
-                
-                var_dump($insert);
-
-            }
-                
-   
-        
-               
-        }else{
-
-            $msg = "veuillez remplir tout les champs";
-
-        }
-            
+                    
+                    if($day <= 5){
+                        
+                        if(isset($_POST['envoyer'])){
+                            
+                            $titre = $_POST['titre'];
+                            $description = $_POST['description'];
+                            $id_utilisateur = $_SESSION['id'];
+                            
+                            $insert = New   Calendar_form();
+                            
+                            if($insert->resatNotExist($debut)){
+                                
+                                if($insert->calendarInsert($titre, $description,$debut,$fin,$id_utilisateur)){
+                                    
+                                    $msg = 'inscription validée';
+                                }else{
+                                    
+                                    $msg = 'erreur inscription';
+                                }
+                                
+                            }else{
     
+                                $msg = 'date déjà prise';
+                            }
+                            
+                        }
+                    }else{
+                        
+                        $msg = 'Nous somme fermé le Weekend';
+                    }
+
+            }else{
+                
+                $msg = ' crenau 1h';
+            }
+            
+        }else{
+            
+            $msg = 'Nous sommes ouvert uniquement de 8 heures a 19 heures';
+        }
         
-        }   
+    }else{
+
+        $msg = 'erreur';
+    }
+    
+}
     
     ?>
     <form action="" method="post" class="form_resa">
-    <?php
+        <?php
 
-    if(isset($msg)){
+        if (isset($msg)) {
 
-        echo $msg;
-    }
-    
-    echo $form->input_titre('titre','titre de la reservation');
-    echo $form->input_description('description', 'description de reservation');
-    echo $form->input_date_debut('debut');
-    echo $form->input_date_fin('fin');
-    echo $form->input_heure_debut('heure_debut');
-    echo $form->input_heure_fin('heure_fin');
-    echo $form->submit('envoyer');
+            echo '<div class="message">' . $msg . '</div>';
+        }
 
-    ?>
+        echo $form->input_titre('titre', 'titre de la reservation');
+        echo $form->input_description('description', 'description de reservation');
+        echo $form->input_date_debut('debut');
+        echo $form->input_date_fin('fin');
+        echo $form->submit('envoyer');
+
+
+
+        ?>
 
     </form>
-
+    <?php require 'include/footer.html'; ?>
 </body>
+
 </html>

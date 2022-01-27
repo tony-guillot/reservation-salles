@@ -26,7 +26,7 @@ class Events{
 
         $results = $req->fetchall();
         
-        var_dump($start);  
+        
         
 
       
@@ -87,18 +87,4 @@ class Events{
         return  $this->db->query("SELECT * FROM reservation as r INNER JOIN utilisateurs on r.id_utilisateur = utilisateurs.id")->fetch();
     }
 
-    public function timeInterval($start, $end){
-
-        if($start < '8' ){
-
-
-            return true;
-        }else{
-
-            return false;
-        }
-
-        
-        
-    }   
 }

@@ -34,13 +34,14 @@ session_start();
         $events = $events->getEventsBetweenByDay($start, $end);
         $user_res = new Events;
         $user_result = $user_res->getUserRes();
-
+   
  
     
     ?>  
         
         <div class="calendar_btn">
         <p id="calendar_p">Planning des reservations des salles</p>
+        <p>Les reservations sont ouvertes du Lundi au Vendredi de 8h à 9h</p>
         <h1 ><?= $month->toString()?></h1>
             <div>
                 <a href="planning.php?month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->years; ?>" class="btn btn-primary">&lt;</a>
@@ -92,6 +93,6 @@ session_start();
     <a href="reservation-form.php" class="calendar_button">+</a>
     
     
-    
+    <?php require 'include/footer.html' ?>
 </body>
 </html>

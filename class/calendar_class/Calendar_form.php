@@ -26,6 +26,27 @@ class Calendar_form{
 
         }       
 
+        public function  resatNotExist($debut){
+
+                
+
+
+                $sql = $this->db->prepare("SELECT debut FROM reservation where debut = ?");
+                $sql->execute(array($debut));
+                
+                $row = $sql->rowCount();
+
+                if($row == 0){
+
+                    return true;
+                }
+
+                else{
+
+                    return false ;
+                }
+
+        }
   
 
 }

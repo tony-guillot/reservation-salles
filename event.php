@@ -39,7 +39,7 @@ session_start();
 
     <h4> <?=$event['titre']; ?></h1>
     <ul>
-        <li>Reservé par : <?= $user_resa['login'];?></li>
+        <li>Reservé par : <?= $user_resa['login']; ?></li>
         <li>Du : <?=(new DateTime($event['debut']))->format('d/m/y H:i');?></li>
         <li>Au : <?=(new DateTime($event['fin']))->format('d/m/y H:i');?></li>
 

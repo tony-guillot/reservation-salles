@@ -27,22 +27,25 @@ session_start();
     ?>
 
 
-<h1>Reservation salles</h1>
+<h1 class="h1_index">Reservation salles</h1>
 
     <?php
      
      if(isset($_SESSION['id'])){
 
-        ?> <h3>Bienvenue <?= $_SESSION['login'];?></h3>
+        ?> <h3 class='index'>Bienvenue <?= $_SESSION['login'];?></h3>
      <?php }
 
         if(!isset($_SESSION['id'])){
 
-        ?> <h5>veuillez vous connecter pour reserver un crénaux </h3>
+        ?> <h5 class='index'>veuillez vous connecter pour reserver un crénaux </h3>
         <?php
+
          }else{
 
-        ?> <p>Cliquez <a href="reservation.php">ici</a> pour reserver une salle </p>
+        ?> <p class='index'>Cliquez <a href="reservation-form.php">ici</a> pour reserver une salle </p>
+        <p class='index'>Cliquez <a href="planning.php">ici</a> voir le planning </p>
+
 
        <?php }  ?>         
         
@@ -55,10 +58,10 @@ session_start();
     
   
 
-    
+    <footer>
     <?php
     require 'include/footer.html';
     ?>
-    
+    </footer>
 </body>
 </html>

@@ -81,8 +81,8 @@ session_start();
         ?>
          <h1> Bienvenue <br/> <?php echo  $_SESSION['login']  ?> </h1>
 
-    <?php } ?>
+    <?php } 
 
-
+        require 'include/footer.html' ?>
 </body>
 </html>

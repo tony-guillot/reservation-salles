@@ -16,6 +16,7 @@ class User{
         $this->db = $this->db->return_connect();
         $this->login = $login;
         $this->password = $password;
+       
         
 
         
@@ -112,5 +113,23 @@ class User{
     }
 }
 
+public function Update($new_login, $new_password, $id_utilisateur){
+
+
+    $sql = $this->db->prepare(" UPDATE utilisateurs SET login = ? , password = ? WHERE id = ?");
+
+    if($sql->execute(array($new_login, $new_password, $id_utilisateur))){
+
+        
+        $new_login = $_SESSION['login'];
+        
+
+    }
+
+
+    
+        
+
+}
 
 }

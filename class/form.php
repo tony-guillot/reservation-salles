@@ -87,7 +87,7 @@ class Form{
 
         return $this->surround(
 
-            '<label class="label">Date de début</label></br><input type="date" required name="'.$name.'" class="col-auto"  min="08:00" max="10:00">'
+            '<label class="label">Date et heure de début</label></br><input type="datetime-local" required name="'.$name.'" class="col-auto"  min="08:00" max="10:00">'
         );
     }
 
@@ -95,23 +95,33 @@ class Form{
 
         return $this->surround(
 
-            '<label class="label">Date de fin</label></br><input type="date" required name="'.$name.'" class="col-auto">'
+            '<label class="label">Date  et heure de fin</label></br><input type="datetime-local" required name="'.$name.'" class="col-auto">'
         );
     }
 
-    public function input_heure_debut($name){
+
+   
+    public function Modifier_login($name,$value){
 
         return $this->surround(
 
-            '<label class="label">heure de début</label></br><input type="time"required name="'.$name.'" class="col-auto">'
+            '<label class="label">Modifier votre nom d\'utilisateur<label></br><input type="text"required name="'.$name.'" class="col-auto" "value="'.$value.'">'
         );
     }
 
-    public function input_heure_fin($name){
+    public function Modifier_password($name){
 
         return $this->surround(
 
-            '<label class="label">heure de fin </label></br><input type="time"required name="'.$name.'" class="col-auto"  >'
+            '<label class="label">Modifier votre mot de passe</label></br><input type="text"required name="'.$name.'" class="col-auto" >'
+        );
+    }
+
+    public function Modifier_password_conf($name){
+
+        return $this->surround(
+
+            '<label class="label">Confirmer le  mot de passe</label></br><input type="text"required name="'.$name.'" class="col-auto" >'
         );
     }
 }
