@@ -64,7 +64,7 @@ session_start();
 
     if(isset($msg)){
 
-    echo $msg;
+        echo '<div class="message">' . $msg . '</div>';
 
     }
  

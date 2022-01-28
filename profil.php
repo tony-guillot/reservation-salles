@@ -79,7 +79,8 @@ if (!isset($_SESSION['id'])) {
 
     <?php if (isset($msg)) {
 
-        echo $msg;
+        echo '<div class="message">' . $msg . '</div>';
+        
     } ?>
 
     <form action="#" method="post" class='form_profil'>

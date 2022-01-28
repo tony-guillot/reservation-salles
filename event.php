@@ -33,11 +33,13 @@ session_start();
     <?php $event = $events->find($_GET['id']); 
 
         $user_resa = $events->getUserRes();
+
+        var_dump($user_resa);
     ?>
 
     <div class="reservation">
 
-    <h4> <?=$event['titre']; ?></h1>
+    <h4> <?=$event['titre'];?></h1>
     <ul>
         <li>Reservé par : <?= $user_resa['login']; ?></li>
         <li>Du : <?=(new DateTime($event['debut']))->format('d/m/y H:i');?></li>

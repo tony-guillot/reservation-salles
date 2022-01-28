@@ -31,7 +31,7 @@ if(!isset($_SESSION['id'])){
     require 'class/calendar_class/Calendar_form.php';
     ?>
 
-    <h1> Reserver un crénau</h1>
+    <h1> Reserver un créneau</h1>
 
     <?php $form = new Form();
 
@@ -74,7 +74,8 @@ if(!isset($_SESSION['id'])){
                                 
                                 if($insert->calendarInsert($titre, $description,$debut,$fin,$id_utilisateur)){
                                     
-                                    $msg = 'inscription validée';
+                                    $msg = 'Réservation validée';
+                                    header( "refresh:2;url=planning.php" );
                                 }else{
                                     
                                     $msg = 'erreur inscription';
@@ -88,22 +89,22 @@ if(!isset($_SESSION['id'])){
                         }
                     }else{
                         
-                        $msg = 'Nous somme fermé le Weekend';
+                        $msg = 'Nous sommes fermé le Weekend';
                     }
 
             }else{
                 
-                $msg = ' crenau 1h';
+                $msg = ' seul les creneaux de 1h sont disponible';
             }
             
         }else{
             
-            $msg = 'Nous sommes ouvert uniquement de 8 heures a 19 heures';
+            $msg = 'Nous sommes ouvert uniquement de 8h à 19h';
         }
         
     }else{
 
-        $msg = 'erreur';
+        $msg = 'Veuillez entrer une date valide';
     }
     
 }

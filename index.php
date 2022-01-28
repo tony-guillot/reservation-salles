@@ -1,8 +1,9 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,56 +13,49 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body>
-    
-    <?php 
-    require 'include/header.php';
+    <header>
+        <?php require 'include/header.php'; ?>
+    </header>
 
-
-    require 'class/Db_connect.php';
-    require 'class/form.php';
-
-    
-
-
-    ?>
-
-
-<h1 class="h1_index">Reservation salles</h1>
-
-    <?php
-     
-     if(isset($_SESSION['id'])){
-
-        ?> <h3 class='index'>Bienvenue <?= $_SESSION['login'];?></h3>
-     <?php }
-
-        if(!isset($_SESSION['id'])){
-
-        ?> <h5 class='index'>veuillez vous connecter pour reserver un crénaux </h3>
+    <main>
         <?php
+        require 'class/Db_connect.php';
+        require 'class/form.php';
+        ?>
 
-         }else{
+        <div class="titre">
+            <h1 class="h1_index">Reservation salles</h1>
 
-        ?> <p class='index'>Cliquez <a href="reservation-form.php">ici</a> pour reserver une salle </p>
-        <p class='index'>Cliquez <a href="planning.php">ici</a> voir le planning </p>
+            <?php
+
+            if (isset($_SESSION['id'])) {
+
+            ?> <h3 class='index'>Bienvenue <?= $_SESSION['login']; ?></h3>
+            <?php }
+
+            if (!isset($_SESSION['id'])) {
+
+            ?> <h5 class='index'>veuillez vous connecter pour reserver un créneau </h3>
+                <?php
+
+            } else {
+
+                ?> <p class='index'>Cliquez <a href="reservation-form.php">ici</a> pour reserver une salle </p>
+                    <p class='index'>Cliquez <a href="planning.php">ici</a> voir le planning </p>
 
 
-       <?php }  ?>         
-        
-    
+                <?php }  ?>
+        </div>
 
-
-    
-    
-
-    
-  
+    </main>
 
     <footer>
-    <?php
-    require 'include/footer.html';
-    ?>
+        <?php
+        require 'include/footer.html';
+        ?>
     </footer>
 </body>
+
 </html>

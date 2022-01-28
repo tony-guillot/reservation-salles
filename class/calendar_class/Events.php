@@ -80,11 +80,11 @@ class Events{
     }
 
     /**
-     * @return string permet de récuperer le login des personnes qui ont reserver
+     * @return string permet de récuperer le login des personnes qui ont reservé
      */
     public function getUserRes(){
 
-        return  $this->db->query("SELECT * FROM reservation as r INNER JOIN utilisateurs on r.id_utilisateur = utilisateurs.id")->fetch();
+        return  $this->db->query("SELECT * FROM utilisateurs INNER JOIN reservation on utilisateurs.id = reservation.id_utilisateur")->fetch();
     }
 
 }

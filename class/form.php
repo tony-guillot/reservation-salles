@@ -39,7 +39,7 @@ class Form{
 
     public function input($name,$placeholder){
     
-    return $this->surround('<label>Nom d\'utilisateur</label></br><input type="text" required name="'.$name.'" placeholder="'.$placeholder.'">');
+    return $this->surround('<label  class="label">Nom d\'utilisateur</label></br><input type="text" required name="'.$name.'" placeholder="'.$placeholder.'">');
     
     }
     
