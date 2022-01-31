@@ -14,9 +14,11 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-    <?php require 'include/header.php';
+    <header>
+    <?php require 'include/header.php';?>
+    </header>
 
-     require 'class/calendar_class/Events.php';
+    <?php  require 'class/calendar_class/Events.php';
 
     $events = new Events();
    
@@ -33,8 +35,9 @@ session_start();
     <?php $event = $events->find($_GET['id']); 
 
         $user_resa = $events->getUserRes();
-
         var_dump($user_resa);
+
+        // var_dump($user_resa);
     ?>
 
     <div class="reservation">

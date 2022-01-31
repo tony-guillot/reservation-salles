@@ -1,8 +1,9 @@
-<?php 
+<?php
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,78 +12,82 @@ session_start();
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
-<body>  
 
-    <?php
-    include 'include/header.php';
-    ?>
+<body>
+    <header>
+        <?php
+        include 'include/header.php';
+        ?>
+    </header>
 
+    <main>
         <h1>Connexion</h1>
 
 
-<?php
+        <?php
 
-    require 'class/form.php';
-    require 'class/User.php';
-    
-
-    $form = new Form($_POST);
-    
-    if(isset($_POST['envoyer'])){
+        require 'class/form.php';
+        require 'class/User.php';
 
 
-        if(isset($_POST['login'],$_POST['password']) && !empty($_POST['login']) && !empty($_POST['password'])){
-            $login = $_POST['login'];
-            $password = $_POST['password']; 
-            
-            $login = new User($login, $password);
-            
-            if($login->checkUserLogin()){
+        $form = new Form($_POST);
 
-                if($login->login($password)){
+        if (isset($_POST['envoyer'])) {
 
-                    $msg = 'vous êtes connecté';
-                    header( "refresh:2;url=index.php" );
-                
+
+            if (isset($_POST['login'], $_POST['password']) && !empty($_POST['login']) && !empty($_POST['password'])) {
+                $login = $_POST['login'];
+                $password = $_POST['password'];
+
+                $login = new User($login, $password);
+
+                if ($login->checkUserLogin()) {
+
+                    if ($login->login($password)) {
+
+                        $msg = 'vous êtes connecté';
+                        header("refresh:2;url=index.php");
+                    }
+                } else {
+
+                    $msg = 'mauvais nom d\utilisateur ou mot de passe';
                 }
+            } else {
 
-            }else{
+                $msg = 'veuillez remplir tout les champs';
+            }
+        }
+        ?>
 
-                $msg = 'mauvais nom d\utilisateur ou mot de passe';
+        <form action="#" method="post">
+
+            <?php
+
+            if (isset($msg)) {
+
+                echo '<div class="message">' . $msg . '</div>';
             }
 
-        }else{
+            echo $form->input('login', 'Entrez votre nom d\'utilisateur');
+            echo $form->password('password', 'Entrez votre mot de passe');
+            echo $form->submit('envoyer');
 
-            $msg = 'veuillez remplir tout les champs';
-        }
-}
+            ?>
+
+        </form>
+    </main>
+    <?php
+    if (isset($_SESSION['login'])) {
+
     ?>
-     
-    <form action="#" method="post">
-    
-     <?php
+        <h1> Bienvenue <br /> <?php echo  $_SESSION['login']  ?> </h1>
 
-    if(isset($msg)){
+    <?php } ?>
 
-        echo '<div class="message">' . $msg . '</div>';
-
-    }
- 
-     echo $form->input('login','Entrez votre nom d\'utilisateur');
-     echo $form->password('password','Entrez votre mot de passe');
-     echo $form->submit('envoyer');
-     
-     ?>
-
-    </form>
-    <?php 
-    if(isset($_SESSION['login'])){ 
-   
-        ?>
-         <h1> Bienvenue <br/> <?php echo  $_SESSION['login']  ?> </h1>
-
-    <?php } 
-
-        require 'include/footer.html' ?>
+    <footer>
+        
+        <?php require 'include/footer.html' ?>
+    </footer>
 </body>
+
 </html>

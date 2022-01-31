@@ -84,7 +84,15 @@ class Events{
      */
     public function getUserRes(){
 
-        return  $this->db->query("SELECT * FROM utilisateurs INNER JOIN reservation on utilisateurs.id = reservation.id_utilisateur")->fetch();
+        $sql = $this->db->prepare("SELECT id_utilisateur FROM reservation");
+        $sql->execute();
+        $res = $sql->fetch();
+
+        $user = $this->db->prepare("SELECT * FROM utilisateurs WHERE id  = ?");
+        $user->execute(array($res['id_utilisateur']));
+        $result = $user->fetch();
+
+        return $result;
     }
 
 }

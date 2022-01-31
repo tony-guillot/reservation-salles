@@ -17,12 +17,14 @@ session_start();
 </head>
 <body>
 
-    
+    <header>
     <?php 
 
-    require 'include/header.php';
+    require 'include/header.php';?>
+
+    </header>
     
-    require 'class/calendar_class/Month.php';
+    <?php require 'class/calendar_class/Month.php';
     require 'class/calendar_class/Events.php';
     
         $events = new Events;
@@ -92,7 +94,8 @@ session_start();
 
     <a href="reservation-form.php" class="calendar_button">+</a>
     
-    
+    <footer>
     <?php require 'include/footer.html' ?>
+    </footer>
 </body>
 </html>
