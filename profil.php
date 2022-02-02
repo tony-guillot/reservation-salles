@@ -24,7 +24,7 @@ if (!isset($_SESSION['id'])) {
     <?php require "include/header.php";
 
 
-    require "class/Form.php";
+    require "class/form.php";
 
     require 'class/User.php';
 
