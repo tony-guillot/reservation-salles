@@ -100,8 +100,10 @@ if (!isset($_SESSION['id'])) {
 
 
     </form>
-    
+
+    <footer>
     <?php require 'include/footer.html' ?>
+    </footer>
 </body>
 
 </html>

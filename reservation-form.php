@@ -131,5 +131,4 @@ if(!isset($_SESSION['id'])){
     </form>
     <?php require 'include/footer.html'; ?>
 </body>
-
 </html>
